@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Interactive Map</title>
+	
+<style type="text/css">
+
+
+	
+@font-face{
+	font-family:titlefont;	
+	
+
+#title{
+		font-family:titlefont;
+}
+
+.starcolor{
+   color:red;   
+   cursor:pointer;
+   text-shadow:3px 3px 5px #000000;
+   font-size:24px;
+}    
+    
+.starcolor:hover{
+   color:#DFA30C;
+}
+   
+.maptext{
+    font-size:14px; 
+    font-weight:bold;
+    text-shadow:3px 3px 5px #000000;
+    color:#ffffff;"
+}
+
+.landmark_pic{
+	
+}
+
+.landmark_pic:hover{
+	width:60px;
+}
+
+</style>
+	
+<script type="text/javascript">
+
+var inhab_info_array = new Array();
+inhab_info_array[0];
+inhab_info_array[1] = "Feral cats are very cautious and initially aggressive, but when treated well, they become great companions. <br><br> Scientific name: Felis catus <br><br> Average size: 8-12 inches tall; 12-24 inches long; 3-8 lbs <br><br> Average life span: 15 years domesticated, 5 years in the wild"
+inhab_info_array[2] = "Fennec foxes are extremely well adapted to their environment. Their sandy fur protects them from cold desert nights and from predators by blending with the environment. Large ears help them regulate their body temperature. <br><br> Scientific name: Vulpes V.zerda <br><br> Average size: 8 inches tall; 9-16 inches long; 1.5-3.5 lbs <br><br> Average life span: 10 years";
+inhab_info_array[3] = "Men on the island provide for the community by fishing, hunting, growing crops or creating furniture, pottery or clothes.";
+inhab_info_array[4] = "Deer are graceful animals with long legs and narrow, pointed hooves. Adult males wear branching antlers. When a deer is alarmed, it raises its tail, revealing its white part underneath <br><br> Scientific name: Odocoileus virginianus <br><br> Average size: 71 inches; 39 inches tall at the shoulder; 110-150 lbs <br><br> Average life span: 6 years";
+inhab_info_array[5] = "Sea cows were hunted to extinction everywhere except at Anchor Haven. They are one of the few animals that the people of the island do not hunt. These animals were named sea cows for their habit of grazing in herds. <br><br> Scientific name: Hydrodamalis Gigas <br><br> Average size: 33 inches long; 16000-20000 lbs <br><br> Average life span: 90 years";
+inhab_info_array[6] = "Buffaloes are large, cow-like animals with heavy, ridged horns. These horns are a great weapon against predators; males also use them to fight for dominance. <br><br> Scientific name: Syncerus caffer <br><br> Average size: 6-7 feet tall; 12-9 feet long; 700-3000 pounds <br><br> Average life span: 11-22 years";
+inhab_info_array[7] = "Along with men, women of the Anchor Haven hunt, fish, grow crops or sew clothes for themselves and the community.";
+inhab_info_array[8] = "Children of Anchor Haven often help adults by fishing, gathering crops, or by doing other simpler tasks.";
+inhab_info_array[9] = "Seagulls are very intelligent birds that inhabit sea coasts all over the island. They have their own unique hunting techniques, such as stomping on the ground to imitate rain and tricking worms into coming to the surface. <br><br> Scientific name: Larus argentatus <br><br>  Average size: 11-30 inches from head to tail; wingspan: 35-40 inches; 4 oz- 4 lbs <br><br> Average life span: 5-15 years";
+inhab_info_array[10] = "LLlamas are protective, social animals with long lashes and fluffy fur. They live in mountaneous areas around Anchor Haven. <br><br> Scientific name: Lama glama <br><br> Average size: About 4 feet at the shoulder; 284-341 lbs <br> <br> Average life span: 15 years ";
+       
+var place_info_array = new Array();
+place_info_array[0];
+place_info_array[1] = " Many centruries ago, until the location of Anchor Haven was forgotten, Doubloon Archipelago has been a place where pirates would dig their treasures and where they would leave their pets, mostly cats. The cats have become feral and a part of the island's habitat. The inhabitants of the pirate village sometimes come to the Archipelago to dig out treasures and take care of the cats. They have become the most beloved animals of the island, and even appear on the Anchor Haven flag. ";
+place_info_array[2] = "Dry Throat Wasteland is a hot, unwelcoming island on the middle west of Anchor Haven, and it is home to some of the most well-adapted species. One of them is the fennec fox. Those nocturnal animals hide in sand burrows during the day to escape the heat. Their flaxen yellow fur camouflages well with the surroundings, reflects the sunlight during the day and protects them from the cold at night.";
+place_info_array[3] = "The inhabitants of Anchor Haven live in a little settlement on the southwest coast, and the name of their village is Port of Good Hope. The infamous shipwreck occured at this exact place, and the descendats of the pirates never moved from this growing village. The folk of Port of Good Hope makes a living by fishing, farming, specializing in different crafts and trading with each other. ";
+place_info_array[4] = "Woods of the Whales is the centerpiece island of the archipelago, fully covered in trees. It's pleasant climate makes it the perfect habitat for a wide variety of species, and thus it is the most densely populated island of all. One of the species is the deer that the pirates of the Port of Good Hope often hunt for food. ";
+place_info_array[5] = "Mermaid Icebergs are the north part of the Anchor Haven archipelago, a freezing and unwelcoming place. It consists of glaciers that are floating in bitterly cold water, and only the species with the thickest skin and most fat can live there. The other inhabitants of Anchor Haven rarely visit it";
+place_info_array[6] = "Old Salt Savanna is always sunny and dry, although its climate is nowhere near the Dry Throat Wasteland. Only short plants that do not need much water grow here, and the majority of animals are enduring herbivors. The pirates value this grassland for the agricultural resources and grazing lands it provides.";
+place_info_array[7] = "Rocky Ridges is a mountaneous area that is a provider of various useful metals, as well as home to different hoofed animals and carnivors. This uneven environment with secret passages and caves makes it perfect place to sneak up on the prey or hide from the predators when hunting. ";
+place_info_array[8] = "The Bull's Eye lakes, named so for their resemblance of ship windows, are located at the north of Old Salt Savanna. They are the main source of drinkable water for the people of Anchor Haven, and thus they make frequent trips there to replenish their stocks. ";
+place_info_array[9] = "Crimson Beach is a small island, which is known for its unique red soil. When the pirates first came to Anchor Haven, they were somewhat scared by this island, believing that the sand is red from the blood that was spilled here, and swore that they've seen the dead dig their way out of the ground. Although now most people understand that this is just a spooky legend, they still do not feel comfortable discovering this place, and it is only inhabited by seagulls and other sea coast creatures.  ";
+place_info_array[10] = "Ridge of Sunken Ships gained its name and infamous reputation for being the reason why Anchor Haven has been forgotten. Many ships that were to accidentally stumble upon this island would often crash on the reefs and rocks of this ridge. However, this grim graveyard ended up being very useful to the people of the Port of Good Hope, as they would make trips to pick up the tools and materials left behind. The letters, maps, and books of the dead became the basis of fascinating tales that the folk would tell each other and imagine the world far away from Anchor Haven.";
+
+var landmark_info_array = new Array();
+landmark_info_array[0];
+landmark_info_array[1] = "Kraken Bay separates the Sail Isle and the Crimson Beach. It got its name for the interesting shape that reminds of a tentacle.";  
+landmark_info_array[2] = "Seagull Island is located at the north east of Old Salt Savanna. Its shape reminds of a flying bird with spread out wings";
+landmark_info_array[3] = "Venture Valley is a dip between Rocky Ridges and the beach where the Port of Good Hope is located. It forms a long passage, on the bottom of which many fascinating and terrifying creatures can be found.";
+landmark_info_array[4] = "Sail Isle is an island which mostly consists of sand dunes.";
+landmark_info_array[5] = "Willow Woods is the smaller forest that neighbors the Port of Good Hope. It is not as diverse when it comes to its flora and fauna as the Woods of the Whales, but it is a convenient source of meat and lumber.";
+landmark_info_array[6] = "Crocodile Canyon rises to the northwest of the Willow Woods, giving a fascinating view on the ocean.";
+landmark_info_array[7] = "Shark Fin Delta is a semi-closed area to the north of the Woods of the Whales. It is relatively safe, and a great place for fishing or teaching children how to swim.";
+landmark_info_array[8] = "Anchor Bay is a small cove on the red-soil beach";
+landmark_info_array[9] = "Mast Islands gained their name for the unique shape of their group, reminding of a ship mast";
+landmark_info_array[10] = "Quarterdeck Strait is a canal which allows for quick routes around Anchor Haven. Strong currents surround this area on both sides, making it quite dangerous. Only proficient sailors risk going up there.";
+ 
+var inhab_images_array = new Array();
+inhab_images_array[0];
+inhab_images_array[1] = "cat.gif";
+inhab_images_array[2] = "desertfox.gif";
+inhab_images_array[3] = "pirateman.gif";
+inhab_images_array[4] = "deer.gif";
+inhab_images_array[5] = "seacow.gif";
+inhab_images_array[6] = "buffalo.gif";
+inhab_images_array[7] = "piratewoman.gif";
+inhab_images_array[8] = "pirateboy.gif";
+inhab_images_array[9] = "seagull.gif";
+inhab_images_array[10] = "llama.gif";
+    
+    
+    
+var place_flags_array = new Array();
+place_flags_array[0] = 0;
+place_flags_array[1] = 0;
+place_flags_array[2] = 0;
+place_flags_array[3] = 0;
+place_flags_array[4] = 0;
+place_flags_array[5] = 0;
+place_flags_array[6] = 0;
+place_flags_array[7] = 0;
+place_flags_array[8] = 0;
+place_flags_array[9] = 0;
+place_flags_array[10] = 0;
+
+    
+/* THIS IS THE MAIN ONE I AM USING FOR THE INFO PANEL */
+function showInhabInfo(n){
+	document.getElementById("content_div").innerHTML = "<br>Info for Item<br><br><input type='button' value='Image View' onclick='showImage(" + n + ");' style='background-color:#AAA049; width:130px; height:22px;'><br><br>" + inhab_info_array[n] + "<br><br>"
+
+}
+
+function showPlaceInfo(n){
+	document.getElementById("content_div").innerHTML = "<br>Info for Item<br><br><input type='button' value='Image View' onclick='showImage(" + n + ");' style='background-color:#AAA049; width:130px; height:22px;'><br><br>" + place_info_array[n];
+    
+}
+
+function showImage(n){
+    document.getElementById("content_div").innerHTML = "<img src='" + inhab_images_array[n] + "'width='250px'>";
+}
+    
+function showLandmarkInfo(n){
+	document.getElementById("info_box").innerHTML = landmark_info_array[n];
+	
+}
+
+function mouseoverColor(n){
+	document.getElementById("box_" + n).style.borderColor = "#000000";
+	if(place_flags_array[n] == 1){
+		clickColor(n);
+	}
+}
+
+function mouseoffColor(n){
+	if(place_flags_array[n] == 0){
+		document.getElementById("box_" + n).style.borderColor = "red";
+	}
+}
+	
+function clickColor(n){
+	document.getElementById("box_" + n).style.borderColor = "#ffffff";
+	place_flags_array[n] = 1;
+}
+
+var inhab_flag = 1;
+
+function toggleInhabitants(){
+    if(inhab_flag == 1){
+        for(var n=1; n<inhab_info_array.length; n++){
+            document.getElementById("box_" + n).style.visibility = "hidden";
+          
+        }
+        inhab_flag = 0;
+    }
+    else if(inhab_flag == 0){
+        for(var n=1; n<inhab_info_array.length; n++){
+            document.getElementById("box_" + n).style.visibility = "visible";
+            document.getElementById("box_" + n).style.borderColor = "red";
+   
+        }
+        inhab_flag = 1;
+    }
+}
+
+var place_flag = 1;
+    
+function togglePlaces(){
+    if(place_flag == 1){
+        for(var n=1; n<place_info_array.length; n++){
+            document.getElementById("span_" + (n)).style.visibility = "hidden";
+        }
+        place_flag = 0;
+    }
+    else if(place_flag == 0){
+        for(var n=1; n<place_info_array.length; n++){
+            document.getElementById("span_" + (n)).style.visibility = "visible";
+        }
+        place_flag = 1;
+    }
+}
+    
+var landmark_flag = 1;
+    
+function toggleLandmarks(){
+    if(landmark_flag == 1){
+        for(var n=1; n<landmark_info_array.length; n++){
+            document.getElementById("span_" + (n + 10)).style.visibility = "hidden";
+        }
+        landmark_flag = 0;
+    }
+    else if(landmark_flag == 0){
+        for(var n=1; n<landmark_info_array.length; n++){
+            document.getElementById("span_" + (n + 10)).style.visibility = "visible";
+        }
+        landmark_flag = 1;
+    }
+}
+   
+	var moveseagull;
+	var seagull_xpos = 100;
+    var left_right_flag = "left";
+	
+	function startSequence(){
+		moveseagull = setInterval(flyseagull, 50);
+	}
+	function flyseagull(){
+		if(left_right_flag == "left"){
+		seagull_xpos = seagull_xpos + 10;
+        if(seagull_xpos < 100){
+			left_right_flag = "right";
+		}
+			}
+		else{
+			seagull_xpos = seagull_xpos + 10
+			if(seagull_xpos > 1150){
+				left_right_flag = "left";
+			}
+		}
+		document.getElementById("seagull").style.left = seagull_xpos + "px";
+	}
+	
+	
+</script>	
+	
+</head>
+
+<body onload="javascript:startSequence(); flyseagull()">
+	
+    <div id="maindiv" style="position:absolute; top:0px; left:80px; width:1200px; z-index:22; background-color:yellow;">
+    
+	<!-- BEGIN TITLE AREA -->
+        
+	<div id="title" style="position:absolute; left:20px; top:5px; width:1200px; height:160px; line-height:160px; vertical-align:50px;font-family:UnZialish; font-size:110px; background-color:#D8C69A; text-align:center; z-index:10; letter-spacing:24px; color:#6E5A36;">&nbsp;Anchor Haven<span style="letter-spacing:39px;"></span></div>
+        
+    <div id="flag_div" style="position:absolute; left:1240px; top:5px; width:275px; height:160px;"><img src="flag.jpg" width="275px"></div>
+	
+	<img src="IMG_4971edited.jpg" width="1200px" style="position:absolute; top:178px; left:20px;">
+        
+    
+	
+	<!-- END TITLE AREA -->
+	
+		  <div id = "seagull" style="position:absolute; top:450px; left:140px; z-index:101; width:100px; height:100px; transform: scaleX(-1)"><img src = "seagull.gif" width = "150px"></div>
+	<!-- BEGIN INTERACTIVE BOX AREA FOR INHABITANTS -->
+	
+<div id="box_1" style="position:absolute; z-index:10; top:630px; left:125px; width:65px; height:85px; border:solid 3px red; background-color:rgba(236, 234, 218, 0.4); border-radius:5px; box-shadow:3px 3px 6px #000000;" onmouseover="javascript:mouseoverColor(1);" onmouseout="javascript:mouseoffColor(1);" onclick="javascript:clickColor(1); showInhabInfo(1);"><img src="cat.gif" id="character_1" width="165px" onmouseover=""></div>
+	<span id="span_1" style="position:absolute; top:725px; left:85px; width:180px; height:15px; font-weight:bold; text-shadow:3px 3px 5px #000000; color:#ffffff;" onClick="showPlaceInfo(1);"> Doubloon Archipelago</span>
+	
+	<div id="box_2" style="position:absolute; z-index:10; top:450px; left:315px; width:70px; height:70px; border:solid 3px red; background-color:rgba(236, 234, 218, 0.4); border-radius:5px; box-shadow:3px 3px 6px #000000;" onmouseover="javascript:mouseoverColor(2);" onmouseout="javascript:mouseoffColor(2);" onclick="javascript:clickColor(2); showInhabInfo(2);"><img src="desertfox.gif" id="character_1" width="70px" onmouseover=""></div>
+	<span id="span_2" style="position:absolute; top:525px; left:272px; width:180px; height:15px; text-shadow:3px 3px 5px #000000; color:#ffffff; font-weight:bold;" onClick="showPlaceInfo(2);">Dry Throat Wasteland</span>
+	
+	<div id="box_3" style="position:absolute; z-index:10; top:945px; left:584px; width:50px; height:105px; border:solid 3px red; background-color:rgba(236, 234, 218, 0.4); border-radius:5px; box-shadow:3px 3px 6px #000000;" onmouseover="javascript:mouseoverColor(3);" onmouseout="javascript:mouseoffColor(3);" onclick="javascript:clickColor(3); showInhabInfo(3);"><img src="pirateman.gif" id="character_1" width="200px" left="" onmouseover=""></div>
+	<span id="span_3" style="position:absolute; top:1054px; left:578px; width:150px; height:15px; text-shadow:3px 3px 5px #000000; color:#ffffff; font-weight:bold;" onClick="showPlaceInfo(3);">Port of Good Hope</span>
+	
+	<div id="box_4" style="position:absolute; z-index:10; top:400px; left:560px; width:50px; height:101px; border:solid 3px red; background-color:rgba(236, 234, 218, 0.4); border-radius:5px; box-shadow:3px 3px 6px #000000;" onmouseover="javascript:mouseoverColor(4);" onmouseout="javascript:mouseoffColor(4);" onclick="javascript:clickColor(4); showInhabInfo(4);"><img src="deer.gif" id="character_1" width="180px" onmouseover=""></div>
+	<span id="span_4" style="position:absolute; top:510px; left:523px; width:150px; height:15px; text-shadow:3px 3px 5px #000000; color:#ffffff; font-weight:bold;" onClick="showPlaceInfo(4);">Woods of the Whales</span>
+                                                                                                                      
+	<div id="box_5" style="position:absolute; z-index:10; top:170px; left:790px; width:65px; height:73px; border:solid 3px red; background-color:rgba(236, 234, 218, 0.4); border-radius:5px; box-shadow:3px 3px 6px #000000;" onmouseover="javascript:mouseoverColor(5);" onmouseout="javascript:mouseoffColor(5);" onclick="javascript:clickColor(5); showInhabInfo(5);"><img src="seacow.gif" id="character_1" width="135px" onmouseover=""></div>
+	<span id="span_5" style="position:absolute; top:250px; left:750px; width:250px; height:15px; color:#ffffff; text-shadow:3px 3px 5px #000000; font-weight:bold;" onClick="showPlaceInfo(5);">Mermaid Icebergs</span>
+	
+	<div id="box_6" style="position:absolute; z-index:10; top:740px; left:970px; width:55px; height:90px; border:solid 3px red; background-color:rgba(236, 234, 218, 0.4); border-radius:5px; box-shadow:3px 3px 6px #000000;" onmouseover="javascript:mouseoverColor(6);" onmouseout="javascript:mouseoffColor(6);" onclick="javascript:clickColor(6); showInhabInfo(6);"><img src="buffalo.gif" id="character_1" width="160px" onmouseover=""></div>
+	<span id="span_6" style="position:absolute; top:845px; left:940px; width:250px; height:15px; text-shadow:3px 3px 5px #000000; color:#ffffff; font-weight:bold;" onClick="showPlaceInfo(6);">Old Salt Savanna</span>
+	
+	<div id="box_7" style="position:absolute; z-index:10; top:880px; left:950px; width:70px; height:83px; border:solid 3px red; background-color:rgba(236, 234, 218, 0.4); border-radius:5px; box-shadow:3px 3px 6px #000000;" onmouseover="javascript:mouseoverColor(7);" onmouseout="javascript:mouseoffColor(7);" onclick="javascript:clickColor(7); showInhabInfo(7);"><img src="piratewoman.gif" id="character_1" width="80px" onmouseover=""></div>
+	<span id="span_7" style="position:absolute; top:976px; left:915px; width:250px; height:15px; text-shadow:3px 3px 5px #000000; color:#ffffff; font-weight:bold;" onClick="showPlaceInfo(7);">Rocky Ridges</span>
+	
+	<div id="box_8" style="position:absolute; z-index:10; top:580px; left:1000px; width:70px; height:73px; border:solid 3px red; background-color:rgba(236, 234, 218, 0.4); border-radius:5px; box-shadow:3px 3px 6px #000000;" onmouseover="javascript:mouseoverColor(8);" onmouseout="javascript:mouseoffColor(8);" onclick="javascript:clickColor(8); showInhabInfo(8);"><img src="pirateboy.gif" id="character_1" width="70px" onmouseover=""></div>
+	<span id="span_8" style="position:absolute; top:690px; left:950px; width:250px; height:15px; text-shadow:3px 3px 5px #000000; color:#ffffff; font-weight:bold;" onClick="showPlaceInfo(8);">The Bull's Eyes</span>
+	
+	<div id="box_9" style="position:absolute; z-index:10; top:650px; left:400px; width:70px; height:37px; border:solid 3px red; background-color:rgba(236, 234, 218, 0.4); border-radius:5px; box-shadow:3px 3px 6px #000000;" onmouseover="javascript:mouseoverColor(9);" onmouseout="javascript:mouseoffColor(9);" onclick="javascript:clickColor(9); showInhabInfo(9);"><img src="seagull.gif" id="character_1" width="80px" onmouseover=""></div>
+	<span id="span_9" style="position:absolute; top:700px; left:390px; width:250px; height:15px; text-shadow:3px 3px 5px #000000; color:#ffffff; font-weight:bold;" onClick="showPlaceInfo(9);">Crimson Beach</span>
+	
+	<div id="box_10" style="position:absolute; z-index:10; top:470px; left:900px; width:60px; height:87px; border:solid 3px red; background-color:rgba(236, 234, 218, 0.4); border-radius:5px; box-shadow:3px 3px 6px #000000;" onmouseover="javascript:mouseoverColor(10);" onmouseout="javascript:mouseoffColor(10);" onclick="javascript:clickColor(10); showInhabInfo(10);"><img src="llama.gif" id="character_1" width="175px" onmouseover=""></div>
+	<span id="span_10" style="position:absolute; top:595px; left:820px; width:250px; height:15px; text-shadow:3px 3px 5px #000000; color:#ffffff; font-weight:bold;" onClick="showPlaceInfo(10);">Ridge of Sunken Ships </span>
+	
+    <!-- END INTERACTIVE BOX AREA FOR INHABITANTS-->
+	
+	
+    <!-- BEGIN INTERACTIVE STAR AREA USING CLASSES FOR PLACES -->
+ <span id="span_11" style="position:absolute; top:635px; left:565px;font-weight: bold;" onClick="showLandmarkInfo(1)"><span class="starcolor">&#10039;</span><span class="maptext">Kraken Bay</span></span>
+	
+ <span id="span_12" style="position:absolute; top:635px; left:1150px;font-weight:bold;" onClick="showLandmarkInfo(2)"><span class="starcolor">&#10039;</span><span  class="maptext">Seagull Island</span></span>  
+  
+ <span id="span_13" style="position:absolute; top:950px; left:720px;font-weight:bold;" onClick="showLandmarkInfo(3)"><span class="starcolor">&#10039;</span><span  class="maptext">Venture Valley</span></span>       
+                                                                                                                                                
+ <span id="span_14" style="position:absolute; top:580px; left:663px; font-weight:bold;" onClick="showLandmarkInfo(4)"><span class="starcolor">&#10039;</span><span  class="maptext">Sail Isle</span></span>       
+                                                                                                                                                
+ <span id="span_15" style="position:absolute; top:760px; left:443px;font-weight: bold;" onClick="showLandmarkInfo(5)"><span class="starcolor">&#10039;</span><span  class="maptext">Willow Woods</span></span> 
+
+ <span id="span_16" style="position:absolute; top:714px; left:332px;font-weight:bold;" onClick="showLandmarkInfo(6)"><span class="starcolor">&#10039;</span><span  class="maptext">Crocodile Canyon</span></span>       
+                                                                                                                                                
+ <span id="span_17" style="position:absolute; top:365px; left:700px; font-weight:bold;" onClick="showLandmarkInfo(7)"><span class="starcolor">&#10039;</span><span  class="maptext">Shark Fin Delta</span></span>       
+		
+ <span id="span_18" style="position:absolute; top:855px; left:630px; font-weight:bold;" onClick="showLandmarkInfo(8)"><span class="starcolor">&#10039;</span><span  class="maptext">Anchor Bay</span></span>
+         
+ <span id="span_19" style="position:absolute; top:700px; left:668px;font-weight:bold;" onClick="showLandmarkInfo(9)"><span class="starcolor">&#10039;</span><span  class="maptext">Mast Islands</span></span>
+                                                                                                                                             
+ <span id="span_20" style="position:absolute; top:660px; left:275px;font-weight: bold;" onClick="showLandmarkInfo(10)"><span class="starcolor">&#10039;</span><span class="maptext">Quarterdeck <br> Strait</span></span>
+                                                                                                                                                                                                                                                                                                                                                                                                         
+ <!-- END INTERACTIVE STAR AREA USING CLASSES FOR PLACES -->
+			
+<!-- BEGIN INTERACTIVE COMPASS AREA FOR LANDMARKS -->
+    
+        
+<!-- END INTERACTIVE COMPASS AREA FOR LANDMARKS -->
+        
+	<!-- BEGIN INFO DISPLAY AREA -->
+	
+	<div id="button_box" style="position:absolute; top:195px; left:1225px; width:275px; height:190px; padding:10px; text-align:center; background-color:#D3C6A9;"><br><input type="button" value="TOGGLE INHABITANTS" style="background-color:#C5D87F; width:180px; height:28px; border-radius:5px; font-size:14px; color:#474A54; box-shadow:3px 3px 3px #333333;" onclick="toggleInhabitants();"><br><br><input type="button" value="TOGGLE PLACES" style="background-color:#C5D87F; width:180px; height:28px; border-radius:5px; font-size:14px; color:#474A54; box-shadow:3px 3px 3px #333333;"  onclick="togglePlaces();"><br><br><input type="button" value="TOGGLE LANDMARKS" style="background-color:#C5D87F; width:180px; height:28px; border-radius:5px; font-size:14px; color:#474A54; box-shadow:3px 3px 3px #333333;" onclick="toggleLandmarks();"></div>
+	
+	<div id="info_box" style="position:absolute; top:420px; left:1225px; width:275px; height:615px; padding:10px; background-color:#E5D8AA;"><div id="content_div" style="position:absolute; top:10px; text-align:center; width:255px; height:575px; z-index:20; overflow:auto; background-color:#E5D8AA; padding:10px;"><br><span style="font-weight:600; font-size:22px; ">Welcome to Anchor Haven</span><br><br><span style="color:#4D7C17;">&#x022C7; &#x0291C; &#x0227A; ~ &#x0227B; &#x0291B; &#x022C7;</span><br><br>Many centuries ago, a pirate ship named "Anchor" suffered a terrible shipwreck on the coast of a mysterious archipelago that has never been discovered before. The survivors established a small colony, fishing, hunting and growing crops for sustinance. The crew was never found, and their descendants live on Anchor Haven to this day.
+    <br><br>
+    Anchor Haven consists of numerous islands with different terrains and climates. Each one is a habitat to unique animal species, and provides various resources for the abandoned pirate colony to survive.
+		<br><br>
+	Many centuries before the Anchor crew ended up on the island, it was known to many sailors and was often used as a secret place for refuge or for hiding treasures. However, those who knew of this location have passed and the knowledge was lost. Their leftover items, however, helped the descendants of the Anchor crew survive and form their own understanding of the big world out there.
+    <br><br>
+ The earlier generations have tried to leave the island, but their lack of knowledge and resources made these attempts futile, even dangerous. However, maybe one day, a master of shipbuilding and sailing will be born that will save their people and uncover the mysteries of Anchor Haven to the rest of the world. 
+		<br><br>
+		For now, however, the people of Anchor Haven feel happy at their home. They are always occupied and at peace, and can not imagine a different life for themselves.
+    <br><br>
+    </div>
+    </div> 
+        
+	<!-- END INFO DISPLAY AREA -->
+        
+</div>
+    
+</body>
+</html>
